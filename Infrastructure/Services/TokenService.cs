@@ -27,7 +27,7 @@ namespace Infrastructure.Services
 
 
             };
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha384Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

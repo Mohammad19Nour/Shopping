@@ -9,6 +9,8 @@ namespace API.Helpers
     {
         public MappingProfiles()
         {
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<Product,ProductToReturnDto>()
             .ForMember(dest=>dest.ProductBrand , o => o.MapFrom(src=>src.ProductBrand.Name))

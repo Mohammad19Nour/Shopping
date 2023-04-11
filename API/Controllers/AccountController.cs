@@ -30,14 +30,14 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Loging(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            var user = await _userManager.FindByEmailAsync(loginDto.Email.ToLower());
 
             if (user == null)
                 return Unauthorized(new ApiResponse(401));
 
             var res = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            if (res.Succeeded) return Unauthorized(new ApiResponse(401));
+            if (!res.Succeeded) return Unauthorized(new ApiResponse(401));
 
             return new UserDto
             {
@@ -60,7 +60,7 @@ namespace API.Controllers
             var res = await _userManager.CreateAsync(user, registerDto.PAssword);
 
             if (!res.Succeeded) return BadRequest(new ApiResponse(400));
-
+           
             return new UserDto
             {
                 Email = user.Email,
