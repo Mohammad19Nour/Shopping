@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 
 namespace Infrastructure.Data
 {
@@ -63,6 +64,32 @@ namespace Infrastructure.Data
                     PictureUrl = "url"
                 };
                 context.Products.Add(pro);
+                await context.SaveChangesAsync();
+            }
+            if (!context.DeliveryMethods.Any())
+            {
+                context.DeliveryMethods.Add(new DeliveryMethod
+                {
+                    ShorName = "1",
+                    Price = 55,
+                    Description = "desc",
+                    DeliveryTime = "2023-4-5"
+                });
+                
+                context.DeliveryMethods.Add(new DeliveryMethod
+                {
+                    ShorName = "2",
+                    Price = 433,
+                    Description = "desc",
+                    DeliveryTime = "2023-8-8"
+                });
+                context.DeliveryMethods.Add(new DeliveryMethod
+                {
+                    ShorName = "3",
+                    Price = 211,
+                    Description = "desc",
+                    DeliveryTime = "2023-4-1"
+                });
                 await context.SaveChangesAsync();
             }
 
